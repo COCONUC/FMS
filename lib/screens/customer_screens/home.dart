@@ -1,9 +1,9 @@
 
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/screens/customer_screens/create_booking_first_stage.dart';
-import 'package:computer_service_system/screens/customer_screens/product_screen.dart';
-import 'package:computer_service_system/screens/customer_screens/services_screen.dart';
-import 'package:computer_service_system/screens/customer_screens/tracking_appointment.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/screens/customer_screens/create_booking_first_stage.dart';
+import 'package:FMS/screens/customer_screens/product_screen.dart';
+import 'package:FMS/screens/customer_screens/services_screen.dart';
+import 'package:FMS/screens/customer_screens/tracking_appointment.dart';
 import 'package:flutter/material.dart';
 
 

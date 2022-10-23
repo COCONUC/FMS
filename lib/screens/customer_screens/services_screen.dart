@@ -1,7 +1,7 @@
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/constants/utils.dart';
-import 'package:computer_service_system/models/services_data.dart';
-import 'package:computer_service_system/providers/data_class.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/models/services_data.dart';
+import 'package:FMS/providers/data_class.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/constants/utils.dart';
+import 'package:FMS/constants/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/color_constant.dart';

@@ -1,11 +1,11 @@
 
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/features/auth_services.dart';
-import 'package:computer_service_system/providers/data_class.dart';
-import 'package:computer_service_system/router.dart';
-import 'package:computer_service_system/screens/widgets/auth_screen.dart';
-import 'package:computer_service_system/screens/customer_screens/nav_screen.dart';
-import 'package:computer_service_system/screens/staff_screens/staff_home_page.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/features/auth_services.dart';
+import 'package:FMS/providers/data_class.dart';
+import 'package:FMS/router.dart';
+import 'package:FMS/screens/widgets/auth_screen.dart';
+import 'package:FMS/screens/customer_screens/nav_screen.dart';
+import 'package:FMS/screens/staff_screens/staff_home_page.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

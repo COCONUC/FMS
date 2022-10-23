@@ -1,8 +1,8 @@
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/constants/utils.dart';
-import 'package:computer_service_system/features/product_services.dart';
-import 'package:computer_service_system/providers/data_class.dart';
-import 'package:computer_service_system/screens/widgets/accessory_detail.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/features/product_services.dart';
+import 'package:FMS/providers/data_class.dart';
+import 'package:FMS/screens/widgets/accessory_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

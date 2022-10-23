@@ -1,6 +1,6 @@
 
-import 'package:computer_service_system/models/staff_get_booking_object.dart';
-import 'package:computer_service_system/screens/widgets/custom_button.dart';
+import 'package:FMS/models/staff_get_booking_object.dart';
+import 'package:FMS/screens/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

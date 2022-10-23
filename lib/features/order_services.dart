@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/models/order_detail_data.dart';
-import 'package:computer_service_system/models/order_info_data.dart';
-import 'package:computer_service_system/models/order_staff_data.dart';
-import 'package:computer_service_system/screens/staff_screens/view_appointment_page.dart';
+import 'package:FMS/models/order_detail_data.dart';
+import 'package:FMS/models/order_info_data.dart';
+import 'package:FMS/models/order_staff_data.dart';
+import 'package:FMS/screens/staff_screens/view_appointment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,7 +1,7 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/providers/data_class.dart';
-import 'package:computer_service_system/screens/widgets/pick_address_widget.dart';
+import 'package:FMS/providers/data_class.dart';
+import 'package:FMS/screens/widgets/pick_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/color_constant.dart';

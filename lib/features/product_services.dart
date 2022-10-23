@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:computer_service_system/models/accessory_data.dart';
+import 'package:FMS/models/accessory_data.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRequest {

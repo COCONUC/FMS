@@ -1,10 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/features/booking_services.dart';
-import 'package:computer_service_system/features/order_services.dart';
-import 'package:computer_service_system/providers/data_class.dart';
-import 'package:computer_service_system/screens/widgets/computer_info_widget.dart';
-import 'package:computer_service_system/screens/widgets/custom_button.dart';
-import 'package:computer_service_system/screens/widgets/edit_appointment.dart';
+import 'package:FMS/features/booking_services.dart';
+import 'package:FMS/features/order_services.dart';
+import 'package:FMS/providers/data_class.dart';
+import 'package:FMS/screens/widgets/computer_info_widget.dart';
+import 'package:FMS/screens/widgets/custom_button.dart';
+import 'package:FMS/screens/widgets/edit_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/color_constant.dart';

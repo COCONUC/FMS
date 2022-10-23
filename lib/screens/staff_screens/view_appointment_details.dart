@@ -1,10 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/constants/utils.dart';
-import 'package:computer_service_system/features/order_services.dart';
-import 'package:computer_service_system/models/order_info_data.dart';
-import 'package:computer_service_system/models/order_staff_data.dart';
-import 'package:computer_service_system/screens/widgets/accessory_picker_widget.dart';
-import 'package:computer_service_system/screens/widgets/image_picker_widget.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/features/order_services.dart';
+import 'package:FMS/models/order_info_data.dart';
+import 'package:FMS/models/order_staff_data.dart';
+import 'package:FMS/screens/widgets/accessory_picker_widget.dart';
+import 'package:FMS/screens/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
 import '../../constants/color_constant.dart';
 

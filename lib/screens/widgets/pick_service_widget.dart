@@ -1,4 +1,4 @@
-import 'package:computer_service_system/models/service_list_data.dart';
+import 'package:FMS/models/service_list_data.dart';
 import 'package:flutter/material.dart';
 
 class PickService extends StatefulWidget {

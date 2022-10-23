@@ -1,10 +1,10 @@
 
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/screens/customer_screens/product_screen.dart';
-import 'package:computer_service_system/screens/staff_screens/staff_regist_work.dart';
-import 'package:computer_service_system/screens/staff_screens/view_appointment_page.dart';
-import 'package:computer_service_system/screens/staff_screens/view_history_order_page.dart';
-import 'package:computer_service_system/screens/widgets/custom_button.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/screens/customer_screens/product_screen.dart';
+import 'package:FMS/screens/staff_screens/staff_regist_work.dart';
+import 'package:FMS/screens/staff_screens/view_appointment_page.dart';
+import 'package:FMS/screens/staff_screens/view_history_order_page.dart';
+import 'package:FMS/screens/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../widgets/account_screen.dart';
 import '../../features/user_services.dart';

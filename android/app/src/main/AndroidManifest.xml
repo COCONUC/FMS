@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.computer_service_system">
     <application
-        android:label="CSS"
+        android:label="FMS"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

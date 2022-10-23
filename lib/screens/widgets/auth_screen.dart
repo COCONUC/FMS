@@ -1,8 +1,8 @@
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/features/auth_services.dart';
-import 'package:computer_service_system/screens/widgets/custom_button.dart';
-import 'package:computer_service_system/screens/widgets/custom_text_field.dart';
-//import 'package:computer_service_system/screens/widgets/otp_vertify_screen.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/features/auth_services.dart';
+import 'package:FMS/screens/widgets/custom_button.dart';
+import 'package:FMS/screens/widgets/custom_text_field.dart';
+//import 'package:FMS/screens/widgets/otp_vertify_screen.dart';
 import 'package:flutter/material.dart';
 
 enum Auth {

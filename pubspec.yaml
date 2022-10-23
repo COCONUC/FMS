@@ -1,5 +1,5 @@
-name: computer_service_system
-description: CSS Mobile Application v1_0606
+name: FMS
+description: Mobile Application v1_0606
 
 
 version: 1.0.0+1
@@ -77,4 +77,4 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/FMS_logo.png"
+  image_path: "assets/images/Logo_Big.png"

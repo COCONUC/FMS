@@ -1,10 +1,10 @@
-import 'package:computer_service_system/constants/utils.dart';
-import 'package:computer_service_system/features/order_services.dart';
-import 'package:computer_service_system/models/order_staff_data.dart';
-import 'package:computer_service_system/screens/staff_screens/staff_home_page.dart';
-import 'package:computer_service_system/screens/staff_screens/staff_regist_work.dart';
-import 'package:computer_service_system/screens/staff_screens/view_appointment_details.dart';
-import 'package:computer_service_system/screens/staff_screens/view_appointment_page.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/features/order_services.dart';
+import 'package:FMS/models/order_staff_data.dart';
+import 'package:FMS/screens/staff_screens/staff_home_page.dart';
+import 'package:FMS/screens/staff_screens/staff_regist_work.dart';
+import 'package:FMS/screens/staff_screens/view_appointment_details.dart';
+import 'package:FMS/screens/staff_screens/view_appointment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/color_constant.dart';

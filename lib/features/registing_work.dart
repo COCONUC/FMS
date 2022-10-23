@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:computer_service_system/screens/staff_screens/staff_regist_work.dart';
+import 'package:FMS/screens/staff_screens/staff_regist_work.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:computer_service_system/models/slot_data.dart';
+import 'package:FMS/models/slot_data.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/work_schedule_data.dart';

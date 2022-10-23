@@ -1,12 +1,12 @@
 
-import 'package:computer_service_system/constants/color_constant.dart';
-import 'package:computer_service_system/constants/utils.dart';
-import 'package:computer_service_system/features/address_services.dart';
-import 'package:computer_service_system/features/booking_services.dart';
-import 'package:computer_service_system/models/computer_type_object.dart';
-import 'package:computer_service_system/screens/widgets/custom_button.dart';
-import 'package:computer_service_system/screens/widgets/multi_select_widget.dart';
-import 'package:computer_service_system/screens/widgets/pick_address_widget.dart';
+import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/features/address_services.dart';
+import 'package:FMS/features/booking_services.dart';
+import 'package:FMS/models/computer_type_object.dart';
+import 'package:FMS/screens/widgets/custom_button.dart';
+import 'package:FMS/screens/widgets/multi_select_widget.dart';
+import 'package:FMS/screens/widgets/pick_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:provider/provider.dart';

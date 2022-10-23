@@ -1,9 +1,9 @@
 
-import 'package:computer_service_system/features/auth_services.dart';
-import 'package:computer_service_system/providers/data_class.dart';
-import 'package:computer_service_system/screens/widgets/account_button.dart';
-import 'package:computer_service_system/screens/widgets/change_password_widget.dart';
-import 'package:computer_service_system/screens/widgets/update_profile_widget.dart';
+import 'package:FMS/features/auth_services.dart';
+import 'package:FMS/providers/data_class.dart';
+import 'package:FMS/screens/widgets/account_button.dart';
+import 'package:FMS/screens/widgets/change_password_widget.dart';
+import 'package:FMS/screens/widgets/update_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/color_constant.dart';
