@@ -77,7 +77,7 @@ class _StaffViewAppointmentPageState extends State<StaffViewAppointmentPage> {
                             Column(
                               children: [
                                 const SizedBox(height: 5,),
-                                Text('${snapshot.data![index].orderId?.status}', style: TextStyle(color: getOrderStatusColor(snapshot.data![index].orderId?.status)),),
+                                Text(""/*'${snapshot.data![index].orderId?.status}', style: TextStyle(color: getOrderStatusColor(snapshot.data![index].orderId?.status)),*/),
                                 const SizedBox(height: 5,),
                                 if(snapshot.data![index].orderId!.status == "Đang xử lí")
                                   InkWell(onTap: (){

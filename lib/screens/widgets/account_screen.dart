@@ -91,6 +91,11 @@ class _AccountScreenState extends State<AccountScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://www.ascengineersinc.com/uploads/1/3/0/5/13059255/profile-photo-2_orig.jpg'),
+                      maxRadius: 70,
+                    ),
                     const SizedBox(height: 16),
                     Column(
                       children: <Widget>[
@@ -205,7 +210,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Row(
+                    /*Row(
                       children: [
                         AccountButton(
                           text: 'Cập nhật thông tin',
@@ -220,9 +225,9 @@ class _AccountScreenState extends State<AccountScreen> {
                           },
                         ),
                       ],
-                    ),
+                    ),*/
                     const SizedBox(height: 16),
-                    Row(
+                    /*Row(
                       children: [
                         AccountButton(
                           text: 'Đổi mật khẩu',
@@ -237,8 +242,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           },
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 16),
+                    ),*/
+                    const SizedBox(height: 80),
                     Row(
                       children: [
                         AccountButton(

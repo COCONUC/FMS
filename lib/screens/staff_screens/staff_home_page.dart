@@ -1,12 +1,19 @@
 
 import 'package:FMS/constants/color_constant.dart';
+import 'package:FMS/constants/utils.dart';
+import 'package:FMS/features/order_services.dart';
+import 'package:FMS/models/order_staff_data.dart';
+import 'package:FMS/providers/data_class.dart';
 import 'package:FMS/screens/customer_screens/product_screen.dart';
 import 'package:FMS/screens/staff_screens/staff_regist_work.dart';
+import 'package:FMS/screens/staff_screens/view_appointment_details.dart';
 import 'package:FMS/screens/staff_screens/view_appointment_page.dart';
 import 'package:FMS/screens/staff_screens/view_history_order_page.dart';
 import 'package:FMS/screens/widgets/custom_button.dart';
 import 'package:FMS/screens/widgets/navigation_drawer_widget.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/account_screen.dart';
 import '../../features/user_services.dart';
 import '../../models/user.dart';
@@ -19,9 +26,16 @@ class StaffHomePage extends StatefulWidget {
 }
 
 class _StaffHomePageState extends State<StaffHomePage> {
+
   int _selectedItemIndex = 0;
+  int currentPage = 1;
+  late Future<List<OrderStaff>> futureOrderStaff;
+
   @override
   Widget build(BuildContext context) {
+
+    String token = Provider.of<DataClass>(context).user.accessToken;
+    futureOrderStaff = OrderServices().getOrderListForStaff(token,context);
     return Scaffold(
       drawer: NavigationDrawerWidget(),
       //App Bar
@@ -39,88 +53,78 @@ class _StaffHomePageState extends State<StaffHomePage> {
       ),
       //--------------------Body------
       body: Container(
-        decoration: const BoxDecoration(color: mBackgroundColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              "Xin chào!",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25),
-            ),
-            //Button Xem lịch hẹn
-            Container(
-              width: 80,
-              padding: const EdgeInsets.all(15.0),
-              child: CustomButton(
-                  text: 'Xem lịch hẹn',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const StaffViewAppointmentPage()),
-                    );
-                  }),
-            ),
-            //Button Đăng ký lịch làm việc
-            Container(
-              width: 80,
-              padding: const EdgeInsets.all(15.0),
-              child: CustomButton(
-                  text: 'Đăng ký lịch nghỉ',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const StaffRegistWork()),
-                    );
-                  }),
-            ),
-            //Button lịch sử cuộc hẹn
-            Container(
-              width: 80,
-              padding: const EdgeInsets.all(15.0),
-              child: CustomButton(text: 'Đơn đã hoàn thành',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HistoryOrder()),
-                    );
-                  }),
-            ),
-            Container(
-              width: 80,
-              padding: const EdgeInsets.all(15.0),
-              child: CustomButton(
-                  text: 'Text',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const ProductScreen()),
-                    );
-                  }),
-            ),
-            Container(
-              width: 80,
-              padding: const EdgeInsets.all(15.0),
-              child: CustomButton(
-                  text: 'Thông tin tài khoản',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AccountScreen()),
-                    );
-                  }),
-            ),
-          ],
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            color: mBackgroundColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: FutureBuilder<List<OrderStaff>>(
+              future: OrderServices().getOrderListForStaff(token, context),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return snapshot.data!.isNotEmpty ? Align(
+                    alignment: Alignment.topCenter,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(5),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            leading: Text(parseDateDownLine(snapshot.data![index].orderId?.bookingId?.time),textAlign: TextAlign.center,),
+                            title: Text('Khách hàng: ${snapshot.data![index].orderId?.bookingId?.cusName}'),
+                            subtitle:
+                            Text('Địa chỉ: ${printAddress(snapshot.data![index].orderId?.bookingId?.cusAddress?.street,
+                                snapshot.data![index].orderId?.bookingId?.cusAddress?.ward,
+                                snapshot.data![index].orderId?.bookingId?.cusAddress?.district)}'),
+                            trailing:
+                            Column(
+                              children: [
+                                const SizedBox(height: 5,),
+                                Text(""/*'${snapshot.data![index].orderId?.status}', style: TextStyle(color: getOrderStatusColor(snapshot.data![index].orderId?.status)),*/),
+                                const SizedBox(height: 5,),
+                                if(snapshot.data![index].orderId!.status == "Đang xử lí")
+                                  InkWell(onTap: (){
+                                    AwesomeDialog(
+                                      context: context,
+                                      animType: AnimType.SCALE,
+                                      dialogType: DialogType.WARNING,
+                                      title: 'Báo bận',
+                                      desc: 'Gửi thông báo bận cho quản lí?',
+                                      btnCancelOnPress: () {
+                                      },
+                                      btnCancelText: 'Hủy',
+                                      btnOkText: 'Xác nhận',
+                                      btnOkOnPress: () {
+                                        OrderServices().sendBusyOrder(context, token, snapshot.data![index].orderId!.id);
+                                      },
+                                    ).show();
+                                  },child: const Icon(Icons.event_busy, color: Colors.redAccent,),)
+                              ],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => StaffViewAppointmentDetailsPage(
+                                        order: snapshot.data![index],
+                                        token: token,
+                                      )));
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ) : const Center(child: Text('Chưa có lịch hẹn'),);
+                }
+              }),
         ),
       ),
       // Bottom Navigation----------------
