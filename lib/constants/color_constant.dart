@@ -13,3 +13,4 @@ const mSecondaryColor = Color(0xFFD96914);
 const mTextColorSecondary = Color(0xFF747474);
 const mBoxColor = Color(0xE9E7C5B1);
 const themeColor = Color.fromRGBO(66, 135, 245, 1);
+const navigationDrawerColor = Color.fromRGBO(50, 75, 2015, 1);

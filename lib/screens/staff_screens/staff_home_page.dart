@@ -5,6 +5,7 @@ import 'package:FMS/screens/staff_screens/staff_regist_work.dart';
 import 'package:FMS/screens/staff_screens/view_appointment_page.dart';
 import 'package:FMS/screens/staff_screens/view_history_order_page.dart';
 import 'package:FMS/screens/widgets/custom_button.dart';
+import 'package:FMS/screens/widgets/navigation_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import '../widgets/account_screen.dart';
 import '../../features/user_services.dart';
@@ -22,13 +23,14 @@ class _StaffHomePageState extends State<StaffHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawerWidget(),
       //App Bar
       backgroundColor: themeColor,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: themeColor,
         title: const Text(
-          "Computer Services",
+          "Furniture Services",
           style: TextStyle(
             fontSize: 23,
           ),
