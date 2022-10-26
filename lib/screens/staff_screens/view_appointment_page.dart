@@ -14,9 +14,9 @@ import '../widgets/account_screen.dart';
 class StaffViewAppointmentPage extends StatefulWidget {
   static const String routeName = '/view_appointment_page';
   const StaffViewAppointmentPage({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() =>
-      _StaffViewAppointmentPageState();
+  State<StatefulWidget> createState() => _StaffViewAppointmentPageState();
 }
 
 class _StaffViewAppointmentPageState extends State<StaffViewAppointmentPage> {
@@ -27,7 +27,8 @@ class _StaffViewAppointmentPageState extends State<StaffViewAppointmentPage> {
   @override
   Widget build(BuildContext context) {
     String token = Provider.of<DataClass>(context).user.accessToken;
-    futureOrderStaff = OrderServices().getOrderListForStaff(token,context);
+    futureOrderStaff = OrderServices().getOrderListForStaff(token, context);
+
     return Scaffold(
       backgroundColor: themeColor,
       appBar: AppBar(
@@ -57,61 +58,85 @@ class _StaffViewAppointmentPageState extends State<StaffViewAppointmentPage> {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 } else {
-                  return snapshot.data!.isNotEmpty ? Align(
-                    alignment: Alignment.topCenter,
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(5),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            leading: Text(parseDateDownLine(snapshot.data![index].orderId?.bookingId?.time),textAlign: TextAlign.center,),
-                            title: Text('Khách hàng: ${snapshot.data![index].orderId?.bookingId?.cusName}'),
-                            subtitle:
-                            Text('Địa chỉ: ${printAddress(snapshot.data![index].orderId?.bookingId?.cusAddress?.street,
-                                                          snapshot.data![index].orderId?.bookingId?.cusAddress?.ward,
-                                                          snapshot.data![index].orderId?.bookingId?.cusAddress?.district)}'),
-                            trailing:
-                            Column(
-                              children: [
-                                const SizedBox(height: 5,),
-                                Text(""/*'${snapshot.data![index].orderId?.status}', style: TextStyle(color: getOrderStatusColor(snapshot.data![index].orderId?.status)),*/),
-                                const SizedBox(height: 5,),
-                                if(snapshot.data![index].orderId!.status == "Đang xử lí")
-                                  InkWell(onTap: (){
-                                    AwesomeDialog(
-                                      context: context,
-                                      animType: AnimType.SCALE,
-                                      dialogType: DialogType.WARNING,
-                                      title: 'Báo bận',
-                                      desc: 'Gửi thông báo bận cho quản lí?',
-                                      btnCancelOnPress: () {
-                                      },
-                                      btnCancelText: 'Hủy',
-                                      btnOkText: 'Xác nhận',
-                                      btnOkOnPress: () {
-                                        OrderServices().sendBusyOrder(context, token, snapshot.data![index].orderId!.id);
-                                      },
-                                    ).show();
-                                },child: const Icon(Icons.event_busy, color: Colors.redAccent,),)
-                              ],
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StaffViewAppointmentDetailsPage(
-                                        order: snapshot.data![index],
-                                        token: token,
-                                      )));
+                  return snapshot.data!.isNotEmpty
+                      ? Align(
+                          alignment: Alignment.topCenter,
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(5),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: snapshot.data?.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                child: ListTile(
+                                  leading: Text(
+                                    parseDateDownLine(snapshot
+                                        .data![index].orderId?.bookingId?.time),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  title: Text(
+                                      'Khách hàng: ${snapshot.data![index].orderId?.bookingId?.cusName}'),
+                                  subtitle: Text(
+                                      'Địa chỉ: ${printAddress(snapshot.data![index].orderId?.bookingId?.cusAddress?.street, snapshot.data![index].orderId?.bookingId?.cusAddress?.ward, snapshot.data![index].orderId?.bookingId?.cusAddress?.district)}'),
+                                  trailing: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                          "" /*'${snapshot.data![index].orderId?.status}', style: TextStyle(color: getOrderStatusColor(snapshot.data![index].orderId?.status)),*/),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      if (snapshot
+                                              .data![index].orderId!.status ==
+                                          "Đang xử lí")
+                                        InkWell(
+                                          onTap: () {
+                                            AwesomeDialog(
+                                              context: context,
+                                              animType: AnimType.SCALE,
+                                              dialogType: DialogType.WARNING,
+                                              title: 'Báo bận',
+                                              desc:
+                                                  'Gửi thông báo bận cho quản lí?',
+                                              btnCancelOnPress: () {},
+                                              btnCancelText: 'Hủy',
+                                              btnOkText: 'Xác nhận',
+                                              btnOkOnPress: () {
+                                                OrderServices().sendBusyOrder(
+                                                    context,
+                                                    token,
+                                                    snapshot.data![index]
+                                                        .orderId!.id);
+                                              },
+                                            ).show();
+                                          },
+                                          child: const Icon(
+                                            Icons.event_busy,
+                                            color: Colors.redAccent,
+                                          ),
+                                        )
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                StaffViewAppointmentDetailsPage(
+                                                  order: snapshot.data![index],
+                                                  token: token,
+                                                )));
+                                  },
+                                ),
+                              );
                             },
                           ),
+                        )
+                      : const Center(
+                          child: Text('Chưa có lịch hẹn'),
                         );
-                      },
-                    ),
-                  ) : const Center(child: Text('Chưa có lịch hẹn'),);
                 }
               }),
         ),
@@ -129,39 +154,36 @@ class _StaffViewAppointmentPageState extends State<StaffViewAppointmentPage> {
     );
   }
 
-
   Widget buildNavBarItem(IconData icon, int index) {
     return GestureDetector(
       onTap: () {
         setState(() {
           _selectedItemIndex = index;
         });
-        if(_selectedItemIndex == 1){
+        if (_selectedItemIndex == 1) {
           Navigator.pushNamedAndRemoveUntil(
             context,
             StaffViewAppointmentPage.routeName,
-                (route) => false,
+            (route) => false,
           );
         }
-        if(_selectedItemIndex == 0){
+        if (_selectedItemIndex == 0) {
           Navigator.pushNamedAndRemoveUntil(
             context,
             StaffHomePage.routeName,
-                (route) => false,
+            (route) => false,
           );
         }
-        if(_selectedItemIndex == 2){
+        if (_selectedItemIndex == 2) {
           Navigator.pushNamedAndRemoveUntil(
             context,
             StaffRegistWork.routeName,
-                (route) => false,
+            (route) => false,
           );
         }
-        if(_selectedItemIndex == 3){
-          Navigator.push(
-              context, MaterialPageRoute(
-              builder: (context) => const AccountScreen()
-          ));
+        if (_selectedItemIndex == 3) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AccountScreen()));
         }
       },
       child: Container(

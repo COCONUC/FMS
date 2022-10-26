@@ -60,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Stack(children: [Image.asset('assets/images/FMS_logo.png',color: mBackgroundColor.withOpacity(0.8), colorBlendMode: BlendMode.modulate,)]),
                 ListTile(

@@ -1,5 +1,3 @@
-import 'package:FMS/providers/data_class.dart';
-import 'package:FMS/screens/staff_screens/on_going_appointment_page.dart';
 import 'package:FMS/screens/widgets/account_screen.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:FMS/constants/utils.dart';
@@ -9,23 +7,20 @@ import 'package:FMS/models/order_staff_data.dart';
 import 'package:FMS/screens/widgets/accessory_picker_widget.dart';
 import 'package:FMS/screens/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../constants/color_constant.dart';
 
-class StaffViewAppointmentDetailsPage extends StatefulWidget {
+class StaffViewOnGoingAppointmentDetailsPage extends StatefulWidget {
   final OrderStaff order;
   final String token;
-  const StaffViewAppointmentDetailsPage(
-      {Key? key, required this.order, required this.token})
-      : super(key: key);
+  const StaffViewOnGoingAppointmentDetailsPage(
+      {Key? key, required this.order, required this.token}) : super(key: key);
 
   @override
-  State<StaffViewAppointmentDetailsPage> createState() =>
-      _StaffViewAppointmentDetailsState();
+  State<StaffViewOnGoingAppointmentDetailsPage> createState() =>
+      _StaffViewOnGoingAppointmentDetailsState();
 }
 
-class _StaffViewAppointmentDetailsState
-    extends State<StaffViewAppointmentDetailsPage> {
+class _StaffViewOnGoingAppointmentDetailsState extends State<StaffViewOnGoingAppointmentDetailsPage> {
   final _submitKey = GlobalKey<FormState>();
   final TextEditingController nameCom = TextEditingController();
   final TextEditingController codeCom = TextEditingController();
@@ -35,9 +30,6 @@ class _StaffViewAppointmentDetailsState
   late OrderInfo _orderInfo;
   late int _showSaveFloatButton;
   late bool _showBookingInfo;
-  int _selectedItemIndex = 1;
-  int currentPage = 1;
-  late Future<List<OrderStaff>> futureOrderStaff;
 
   void checkStatusOrder(status) {
     if (status == 'Hoàn tất hóa đơn') {
@@ -67,12 +59,11 @@ class _StaffViewAppointmentDetailsState
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AccessoryPicker(
-          id: widget.order.orderId!.id!,
-        );
+        return AccessoryPicker(id: widget.order.orderId!.id!,);
       },
     );
   }
+
 
   @override
   void initState() {
@@ -83,8 +74,6 @@ class _StaffViewAppointmentDetailsState
 
   @override
   Widget build(BuildContext context) {
-    String token = Provider.of<DataClass>(context).user.accessToken;
-    futureOrderStaff = OrderServices().getOrderListForStaff(token, context);
     return Scaffold(
       backgroundColor: themeColor,
       appBar: PreferredSize(
@@ -245,15 +234,16 @@ class _StaffViewAppointmentDetailsState
                         Column(
                           children: <Widget>[
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 const Text("Thời gian:",
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'Regular')),
                                 Flexible(
                                   child: Text(
-                                    parseDate(
-                                        widget.order.orderId?.bookingId?.time),
+                                    parseDate(widget
+                                        .order.orderId?.bookingId?.time),
                                     style: const TextStyle(
                                         fontSize: 18, fontFamily: 'Regular'),
                                     textAlign: TextAlign.right,
@@ -268,12 +258,14 @@ class _StaffViewAppointmentDetailsState
                         Column(
                           children: <Widget>[
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 const Text("Loại dịch vụ:",
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'Regular')),
-                                Text('${widget.order.orderId?.bookingId?.type}',
+                                Text(
+                                    '${widget.order.orderId?.bookingId?.type}',
                                     style: const TextStyle(
                                         fontSize: 18, fontFamily: 'Regular')),
                               ],
@@ -303,7 +295,7 @@ class _StaffViewAppointmentDetailsState
                             Flexible(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(80, 8, 8, 20),
+                                const EdgeInsets.fromLTRB(80, 8, 8, 20),
                                 child: Text(
                                   '${widget.order.orderId?.bookingId?.services?.join(',\n').toString()}',
                                   textAlign: TextAlign.right,
@@ -333,7 +325,7 @@ class _StaffViewAppointmentDetailsState
                             Flexible(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(80, 8, 8, 20),
+                                const EdgeInsets.fromLTRB(80, 8, 8, 20),
                                 child: Text(
                                   '${widget.order.orderId?.bookingId?.description}',
                                   textAlign: TextAlign.justify,
@@ -513,14 +505,8 @@ class _StaffViewAppointmentDetailsState
                             color: Colors.orange,
                           ),
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ImagePickScreen(
-                                          id: widget.order.orderId!.id,
-                                          token: widget.token,
-                                          imgURL: _orderInfo.imgComUrls,
-                                        )));
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => ImagePickScreen(id: widget.order.orderId!.id,token: widget.token, imgURL: _orderInfo.imgComUrls,)));
                           },
                         )
                       ]),
@@ -544,215 +530,190 @@ class _StaffViewAppointmentDetailsState
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text("Ngày tạo:",
                                       style: TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                   Text(parseDate(_orderInfo.createdAt),
                                       style: const TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                 ],
                               ),
                               const SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text("Cập nhật gần nhất:",
                                       style: TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                   Text(parseDate(_orderInfo.updatedAt),
                                       style: const TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                 ],
                               ),
                               const SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text("Trạng thái:",
                                       style: TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                   Text(/*'${_orderInfo.status}'*/ 'Đã xác nhận',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontFamily: 'Regular',
-                                          color: getOrderStatusColor(
-                                              _orderInfo.status))),
+                                          color: getOrderStatusColor(_orderInfo.status)
+                                      )),
                                 ],
                               ),
                               const SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text("",
                                       style: TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
-                                  Text('',
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
+                                  Text(
+                                      '',
                                       style: const TextStyle(
-                                          fontSize: 18, fontFamily: 'Regular')),
+                                          fontSize: 18,
+                                          fontFamily: 'Regular')),
                                 ],
                               ),
                               const Divider(),
                               const SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text("Hạng mục cần thực hiện",
                                       style: TextStyle(
                                           color: mTextColorSecondary,
                                           fontSize: 16,
                                           fontFamily: 'Regular')),
-                                  if (_orderInfo.status != 'Hoàn thành' &&
-                                      _orderInfo.status != 'Hủy')
-                                    InkWell(
-                                      onTap: () {
-                                        _showServiceToChoose();
-                                      },
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.add,
-                                            color: Colors.orange,
-                                            size: 20,
-                                          ),
-                                          Text(
-                                              'Thêm  (${generateOrderDetail.length})'),
-                                        ],
-                                      ),
+                                  if(_orderInfo.status != 'Hoàn thành' && _orderInfo.status != 'Hủy') InkWell(
+                                    onTap: () {
+                                      _showServiceToChoose();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.add,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        Text(
+                                            'Thêm  (${generateOrderDetail.length})'),
+                                      ],
                                     ),
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               if (generateOrderDetail.isNotEmpty)
                                 ListView.builder(
                                     physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
+                                    const NeverScrollableScrollPhysics(),
+                                    scrollDirection:
+                                    Axis.vertical,
                                     shrinkWrap: true,
                                     itemCount: generateOrderDetail.length,
                                     itemBuilder: (context, index) {
-                                      return generateOrderDetail[index]
-                                                  .amountAcc ==
-                                              0
-                                          ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Card(
-                                                color: Colors.white30
-                                                    .withOpacity(0.9),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                shadowColor: Colors.blue,
-                                                child: ListTile(
-                                                  title: Text(
-                                                      '${generateOrderDetail[index].serviceId!.name}'),
-                                                  subtitle: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                          'Đơn giá: ${convertMoney(generateOrderDetail[index].serviceId!.price)}đ x ${generateOrderDetail[index].amountSer}'),
-                                                    ],
-                                                  ),
-                                                  trailing:
-                                                      _showSaveFloatButton == 0
-                                                          ? InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  OrderServices().removeOrderDetail(
-                                                                      context,
-                                                                      widget
-                                                                          .token,
-                                                                      generateOrderDetail[
-                                                                              index]
-                                                                          .id,
-                                                                      widget
-                                                                          .order
-                                                                          .orderId!
-                                                                          .id);
-                                                                });
-                                                              },
-                                                              child: const Icon(
-                                                                Icons
-                                                                    .delete_forever_outlined,
-                                                                size: 22,
-                                                                color: Colors
-                                                                    .redAccent,
-                                                              ),
-                                                            )
-                                                          : Text(convertMoney(
-                                                              generateOrderDetail[
-                                                                      index]
-                                                                  .priceAfter)),
-                                                ),
-                                              ),
-                                            )
-                                          : Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Card(
-                                                color: Colors.white30
-                                                    .withOpacity(0.9),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                shadowColor: Colors.blue,
-                                                child: ListTile(
-                                                  title: Text(
-                                                      '${generateOrderDetail[index].accessoryId!.name}'),
-                                                  subtitle: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                          'Đơn giá: ${convertMoney(generateOrderDetail[index].accessoryId!.price)}đ x ${generateOrderDetail[index].amountAcc}'),
-                                                    ],
-                                                  ),
-                                                  trailing:
-                                                      _showSaveFloatButton == 0
-                                                          ? InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  OrderServices().removeOrderDetail(
-                                                                      context,
-                                                                      widget
-                                                                          .token,
-                                                                      generateOrderDetail[
-                                                                              index]
-                                                                          .id,
-                                                                      widget
-                                                                          .order
-                                                                          .orderId!
-                                                                          .id);
-                                                                });
-                                                              },
-                                                              child: const Icon(
-                                                                Icons
-                                                                    .delete_forever_outlined,
-                                                                size: 22,
-                                                                color: Colors
-                                                                    .redAccent,
-                                                              ),
-                                                            )
-                                                          : Text(convertMoney(
-                                                              generateOrderDetail[
-                                                                      index]
-                                                                  .priceAfter)),
-                                                ),
-                                              ),
-                                            );
+                                      return generateOrderDetail[index].amountAcc==0 ? Padding(
+                                        padding:
+                                        const EdgeInsets
+                                            .only(
+                                            left: 5,
+                                            right: 5),
+                                        child: Card(
+                                          color: Colors.white30.withOpacity(0.9),
+                                          shape:
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius
+                                                .circular(
+                                                10.0),
+                                          ),
+                                          shadowColor:
+                                          Colors.blue,
+                                          child: ListTile(
+                                            title: Text(
+                                                '${generateOrderDetail[index].serviceId!.name}'),
+                                            subtitle: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    'Đơn giá: ${convertMoney(generateOrderDetail[index].serviceId!.price)}đ x ${generateOrderDetail[index].amountSer}'),
+
+                                              ],
+                                            ),
+                                            trailing: _showSaveFloatButton ==0 ? InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  OrderServices().removeOrderDetail(context, widget.token, generateOrderDetail[index].id, widget.order.orderId!.id);
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons
+                                                    .delete_forever_outlined,size: 22, color: Colors.redAccent,),
+                                            ):Text(convertMoney(generateOrderDetail[index].priceAfter)),
+                                          ),
+                                        ),
+                                      ): Padding(
+                                        padding:
+                                        const EdgeInsets
+                                            .only(
+                                            left: 5,
+                                            right: 5),
+                                        child: Card(
+                                          color: Colors.white30.withOpacity(0.9),
+                                          shape:
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius
+                                                .circular(
+                                                10.0),
+                                          ),
+                                          shadowColor:
+                                          Colors.blue,
+                                          child: ListTile(
+                                            title: Text(
+                                                '${generateOrderDetail[index].accessoryId!.name}'),
+                                            subtitle: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    'Đơn giá: ${convertMoney(generateOrderDetail[index].accessoryId!.price)}đ x ${generateOrderDetail[index].amountAcc}'),
+
+                                              ],
+                                            ),
+                                            trailing: _showSaveFloatButton ==0 ? InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  OrderServices().removeOrderDetail(context, widget.token, generateOrderDetail[index].id, widget.order.orderId!.id);
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons
+                                                    .delete_forever_outlined,size: 22, color: Colors.redAccent,),
+                                            ) : Text(convertMoney(generateOrderDetail[index].priceAfter)),
+                                          ),
+                                        ),
+                                      );
                                     })
                             ],
                           );
@@ -769,23 +730,18 @@ class _StaffViewAppointmentDetailsState
       ),
       floatingActionButton: _showSaveFloatButton == 0
           ? FloatingActionButton.extended(
-              onPressed: () {
-                /* OrderServices().completeOderByStaff(
+        onPressed: () {
+          /* OrderServices().completeOderByStaff(
                     context, widget.token, widget.order.orderId!.id);*/
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            StaffViewOnGoingAppointmentDetailsPage(
-                              order: snapshot.data![index],
-                              token: token,
-                            )));
-              },
-              icon: const Icon(Icons.swap_horiz),
-              label: const Text('Chuyển trạng thái'),
-              backgroundColor: Colors.yellowAccent,
-            )
-          : const SizedBox(),
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const AccountScreen(),
+          ));
+        },
+        icon: const Icon(Icons.swap_horiz),
+        label: const Text('Chuyển trạng thái'),
+        backgroundColor: Colors.yellowAccent,
+      )
+          :  const SizedBox(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
