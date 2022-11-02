@@ -79,7 +79,12 @@ class _StaffViewAppointmentDetailsState
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
+<<<<<<< Updated upstream
           actions: <Widget>[
+=======
+          /*actions: <Widget>[
+            // Nút hủy lịch hẹn
+>>>>>>> Stashed changes
             IconButton(
               icon: const Icon(Icons.cancel,color: Colors.red),
               tooltip: 'Hủy lịch hẹn',
@@ -110,7 +115,11 @@ class _StaffViewAppointmentDetailsState
                 }
               },
             ), //IconButton//IconButton
+<<<<<<< Updated upstream
           ],
+=======
+          ],*/
+>>>>>>> Stashed changes
           elevation: 0.0,
           backgroundColor: themeColor,
           title: const Text(
@@ -136,97 +145,200 @@ class _StaffViewAppointmentDetailsState
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: FutureBuilder<List<OrderStaff>>(
+    future: OrderServices().getOrderListForStaff(token, context),
+    builder: (context, snapshot) {
+    if (!snapshot.hasData) {
+    return const Center(child: CircularProgressIndicator());
+    } else {
+    return snapshot.data!.isNotEmpty ? Align(
+    alignment: Alignment.topCenter,
+    child: ListView.builder(
+    padding: const EdgeInsets.all(5),
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    itemCount: snapshot.data?.length,
+    itemBuilder: (context, index) {
+      return Container(
+          /*padding: const EdgeInsets.all(16.0),*/
+        child: Column(
+          children: <Widget>[
+            const Text("Thông tin khách hàng",
+                style: TextStyle(
+                    color: mTextColorSecondary,
+                    fontSize: 16,
+                    fontFamily: 'Regular')),
+            const SizedBox(height: 8),
+            Column(
+      children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const Text("Tên khách hàng:",
+                    style: TextStyle(
+                        fontSize: 18, fontFamily: 'Regular')),
+                Text('${widget.order.orderId?.bookingId?.cusName}',
+                    style: const TextStyle(
+                        fontSize: 18, fontFamily: 'Regular')),
+              ],
+            ),
+            //const Divider()
+        ],
+        ),
+        const SizedBox(height: 16),
+        Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const Text("Số điện thoại:",
+                    style: TextStyle(
+                        fontSize: 18, fontFamily: 'Regular')),
+                Text('${widget.order.orderId?.bookingId?.phonenum}',
+                    style: const TextStyle(
+                        fontSize: 18, fontFamily: 'Regular')),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const Text("Địa chỉ:   ",
+                    style: TextStyle(
+                        fontSize: 18, fontFamily: 'Regular')),
+                Flexible(
+                  child: Text(
+                    printAddress(
+                        widget.order.orderId?.bookingId?.cusAddress
+                            ?.street,
+                        widget.order.orderId?.bookingId?.cusAddress
+                            ?.ward,
+                        widget.order.orderId?.bookingId?.cusAddress
+                            ?.district),
+                    style: const TextStyle(
+                        fontSize: 18, fontFamily: 'Regular'),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+          ],
+        ),
+        const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Thông tin lịch hẹn",
+                  style: TextStyle(
+                      color: mTextColorSecondary,
+                      fontSize: 16,
+                      fontFamily: 'Regular')),
+              InkWell(
+                child: const Icon(
+                  Icons.info,
+                  color: Colors.blue,
+                ),
+                onTap: () {
+                  setState(() {
+                    _showBookingInfo = !_showBookingInfo;
+                  });
+                },
+              )
+            ],
+          ),
+          if (_showBookingInfo == true)
+          Column(
+            children: [
+              Column(
                 children: <Widget>[
-                  const Text("Thông tin khách hàng",
-                      style: TextStyle(
-                          color: mTextColorSecondary,
-                          fontSize: 16,
-                          fontFamily: 'Regular')),
-                  const SizedBox(height: 8),
-                  Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text("Tên khách hàng:",
-                              style: TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular')),
-                          Text('${widget.order.orderId?.bookingId?.cusName}',
-                              style: const TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular')),
-                        ],
-                      ),
-                      //const Divider()
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text("Số điện thoại:",
-                              style: TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular')),
-                          Text('${widget.order.orderId?.bookingId?.phonenum}',
-                              style: const TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular')),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text("Địa chỉ:   ",
-                              style: TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular')),
-                          Flexible(
-                            child: Text(
-                              printAddress(
-                                  widget.order.orderId?.bookingId?.cusAddress
-                                      ?.street,
-                                  widget.order.orderId?.bookingId?.cusAddress
-                                      ?.ward,
-                                  widget.order.orderId?.bookingId?.cusAddress
-                                      ?.district),
-                              style: const TextStyle(
-                                  fontSize: 18, fontFamily: 'Regular'),
-                              textAlign: TextAlign.right,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Divider(),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Thông tin lịch hẹn",
+                    children: <Widget>[
+                      const Text("Thời gian:",
                           style: TextStyle(
-                              color: mTextColorSecondary,
-                              fontSize: 16,
-                              fontFamily: 'Regular')),
-                      InkWell(
-                        child: const Icon(
-                          Icons.info,
-                          color: Colors.blue,
+                              fontSize: 18, fontFamily: 'Regular')),
+                      Flexible(
+                        child: Text(
+                          parseDate(
+                              widget.order.orderId?.bookingId?.time),
+                          style: const TextStyle(
+                              fontSize: 18, fontFamily: 'Regular'),
+                          textAlign: TextAlign.right,
                         ),
-                        onTap: () {
-                          setState(() {
-                            _showBookingInfo = !_showBookingInfo;
-                          });
-                        },
-                      )
+                      ),
                     ],
                   ),
+                  //const Divider()
+                ],
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const Text("Loại dịch vụ:",
+                          style: TextStyle(
+                              fontSize: 18, fontFamily: 'Regular')),
+                      Text('${widget.order.orderId?.bookingId?.type}',
+                          style: const TextStyle(
+                              fontSize: 18, fontFamily: 'Regular')),
+                    ],
+                  ),
+                  //const Divider()
+                ],
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const <Widget>[
+                      Text("Dịch vụ yêu cầu:",
+                          style: TextStyle(
+                              fontSize: 18, fontFamily: 'Regular')),
+                    ],
+                  ),
+                  //const Divider()
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                // padding:
+                //     const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding:
+                      const EdgeInsets.fromLTRB(80, 8, 8, 20),
+                      child: Text(
+                        '${widget.order.orderId?.bookingId?.services?.join(
+                            ',\n').toString()}',
+                        textAlign: TextAlign.right,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 18.0),
+                        maxLines: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const <Widget>[
+                      Text("Mô tả vấn đề:",
+                          style: TextStyle(
+                              fontSize: 18, fontFamily: 'Regular')),
+                    ],
+                  ),
+<<<<<<< Updated upstream
                   if (_showBookingInfo == true)
                     Column(
                       children: [
@@ -337,11 +449,38 @@ class _StaffViewAppointmentDetailsState
                           ],
                         ),
                       ],
+=======
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding:
+                      const EdgeInsets.fromLTRB(80, 8, 8, 20),
+                      child: Text(
+                        '${widget.order.orderId?.bookingId?.description}',
+                        textAlign: TextAlign.justify,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 18.0),
+                        maxLines: 10,
+                      ),
+>>>>>>> Stashed changes
                     ),
-                  const Divider(),
-                  const SizedBox(height: 8),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        const Divider(),
+        const SizedBox(height: 8),
 
+<<<<<<< Updated upstream
                   Row(
+=======
+        /*Row(
+>>>>>>> Stashed changes
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("Thông tin máy khách",
@@ -488,21 +627,111 @@ class _StaffViewAppointmentDetailsState
                     ],
                   ),
 
+<<<<<<< Updated upstream
                   const Divider(),
                   const SizedBox(height: 8),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("Lưu ảnh máy",
+=======
+        /*const Divider(),*/
+        const SizedBox(height: 8),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Hình ảnh khách gửi",
+                  style: TextStyle(
+                      color: mTextColorSecondary,
+                      fontSize: 16,
+                      fontFamily: 'Regular')),
+              InkWell(
+                child: const Icon(
+                  Icons.image,
+                  color: Colors.orange,
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ImagePickScreen(
+                                id: widget.order.orderId!.id,
+                                token: widget.token,
+                                imgURL: _orderInfo.imgComUrls,
+                              )));
+                },
+              )
+            ]),
+        const Divider(),
+        const SizedBox(height: 8),
+        const Text("Chi tiết hóa đơn",
+            style: TextStyle(
+                color: mTextColorSecondary,
+                fontSize: 16,
+                fontFamily: 'Regular')),
+        const SizedBox(height: 8),
+        FutureBuilder(
+            future: getOrderInfo(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text("Ngày tạo:",
+>>>>>>> Stashed changes
                             style: TextStyle(
-                                color: mTextColorSecondary,
-                                fontSize: 16,
-                                fontFamily: 'Regular')),
-                        InkWell(
-                          child: const Icon(
-                            Icons.image,
-                            color: Colors.orange,
+                                fontSize: 18, fontFamily: 'Regular')),
+                        Text(parseDate(_orderInfo.createdAt),
+                            style: const TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text("Cập nhật gần nhất:",
+                            style: TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                        Text(parseDate(_orderInfo.updatedAt),
+                            style: const TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text("Trạng thái:",
+                            style: TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                        /*Text(*//*'${_orderInfo.status}'*//* 'Đã xác nhận',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: 'Regular',
+                                color: getOrderStatusColor(
+                                    _orderInfo.status))),*/
+                        TextButton(
+                          style: ButtonStyle(
+                            overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                    (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.focused))
+                                    return Colors.red;
+                                  return null; // Defer to the widget's default.
+                                }
+                            ),
                           ),
+<<<<<<< Updated upstream
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => ImagePickScreen(id: widget.order.orderId!.id,token: widget.token, imgURL: _orderInfo.imgComUrls,)));
@@ -725,10 +954,228 @@ class _StaffViewAppointmentDetailsState
                   ),
                 ],
               ),
+=======
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StaffViewOnGoingAppointmentDetailsPage(
+                                      order: snapshot.data![index],
+                                      token: token,
+                                    )));
+                          },
+                          child: Text('${_orderInfo.status}',style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Regular',
+                              color: getOrderStatusColor(_orderInfo.status)
+                          )),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text("",
+                            style: TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                        Text('',
+                            style: const TextStyle(
+                                fontSize: 18, fontFamily: 'Regular')),
+                      ],
+                    ),
+                    const Divider(),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Hạng mục cần thực hiện",
+                            style: TextStyle(
+                                color: mTextColorSecondary,
+                                fontSize: 16,
+                                fontFamily: 'Regular')),
+                        if (_orderInfo.status != 'Hoàn thành' &&
+                            _orderInfo.status != 'Hủy')
+                          InkWell(
+                            onTap: () {
+                              _showServiceToChoose();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.add,
+                                  color: Colors.orange,
+                                  size: 20,
+                                ),
+                                Text(
+                                    'Thêm  (${generateOrderDetail.length})'),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    if (generateOrderDetail.isNotEmpty)
+                      ListView.builder(
+                          physics:
+                          const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: generateOrderDetail.length,
+                          itemBuilder: (context, index) {
+                            return generateOrderDetail[index]
+                                .amountAcc ==
+                                0
+                                ? Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5, right: 5),
+                              child: Card(
+                                color: Colors.white30
+                                    .withOpacity(0.9),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      10.0),
+                                ),
+                                shadowColor: Colors.blue,
+                                child: ListTile(
+                                  title: Text(
+                                      '${generateOrderDetail[index].serviceId!
+                                          .name}'),
+                                  subtitle: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Text(
+                                          'Đơn giá: ${convertMoney(
+                                              generateOrderDetail[index]
+                                                  .serviceId!
+                                                  .price)}đ x ${generateOrderDetail[index]
+                                              .amountSer}'),
+                                    ],
+                                  ),
+                                  trailing:
+                                  _showSaveFloatButton == 0
+                                      ? InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        OrderServices().removeOrderDetail(
+                                            context,
+                                            widget
+                                                .token,
+                                            generateOrderDetail[
+                                            index]
+                                                .id,
+                                            widget
+                                                .order
+                                                .orderId!
+                                                .id);
+                                      });
+                                    },
+                                    child: const Icon(
+                                      Icons
+                                          .delete_forever_outlined,
+                                      size: 22,
+                                      color: Colors
+                                          .redAccent,
+                                    ),
+                                  )
+                                      : Text(convertMoney(
+                                      generateOrderDetail[
+                                      index]
+                                          .priceAfter)),
+                                ),
+                              ),
+                            )
+                                : Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5, right: 5),
+                              child: Card(
+                                color: Colors.white30
+                                    .withOpacity(0.9),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      10.0),
+                                ),
+                                shadowColor: Colors.blue,
+                                child: ListTile(
+                                  title: Text(
+                                      '${generateOrderDetail[index].accessoryId!
+                                          .name}'),
+                                  subtitle: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Text(
+                                          'Đơn giá: ${convertMoney(
+                                              generateOrderDetail[index]
+                                                  .accessoryId!
+                                                  .price)}đ x ${generateOrderDetail[index]
+                                              .amountAcc}'),
+                                    ],
+                                  ),
+                                  trailing:
+                                  _showSaveFloatButton == 0
+                                      ? InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        OrderServices().removeOrderDetail(
+                                            context,
+                                            widget
+                                                .token,
+                                            generateOrderDetail[
+                                            index]
+                                                .id,
+                                            widget
+                                                .order
+                                                .orderId!
+                                                .id);
+                                      });
+                                    },
+                                    child: const Icon(
+                                      Icons
+                                          .delete_forever_outlined,
+                                      size: 22,
+                                      color: Colors
+                                          .redAccent,
+                                    ),
+                                  )
+                                      : Text(convertMoney(
+                                      generateOrderDetail[
+                                      index]
+                                          .priceAfter)),
+                                ),
+                              ),
+                            );
+                          })
+                  ],
+                );
+              }
+            }),
+        const SizedBox(
+          height: 50,
+        ),
+
+      ],
+      ),
+      );
+    },
+    ),
+    ) : const Center(child: Text('Chưa có lịch hẹn'),);
+    }
+    }),
+>>>>>>> Stashed changes
             ),
           ),
         ),
+
       ),
+<<<<<<< Updated upstream
       floatingActionButton: _showSaveFloatButton == 1
           ? FloatingActionButton.extended(
               onPressed: () {
@@ -740,6 +1187,20 @@ class _StaffViewAppointmentDetailsState
               backgroundColor: Colors.green,
             )
           :  const SizedBox(),
+=======
+
+      floatingActionButton: _showSaveFloatButton == 1
+          ? FloatingActionButton.extended(
+        onPressed: () {
+          OrderServices().completeOderByStaff(
+              context, widget.token, widget.order.orderId!.id);
+        },
+        icon: const Icon(Icons.done_all),
+        label: const Text('Hoàn thành sửa chữa'),
+        backgroundColor: Colors.green,
+      )
+          : const SizedBox(),
+>>>>>>> Stashed changes
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

@@ -19,6 +19,13 @@ class StaffHomePage extends StatefulWidget {
 
 class _StaffHomePageState extends State<StaffHomePage> {
   int _selectedItemIndex = 0;
+<<<<<<< Updated upstream
+=======
+  int currentPage = 1;
+  late Future<List<OrderStaff>> futureOrderStaff;
+
+
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
