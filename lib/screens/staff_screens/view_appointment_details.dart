@@ -772,14 +772,14 @@ class _StaffViewAppointmentDetailsState
               onPressed: () {
                 /* OrderServices().completeOderByStaff(
                     context, widget.token, widget.order.orderId!.id);*/
-                Navigator.push(
+               /* Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
                             StaffViewOnGoingAppointmentDetailsPage(
                               order: snapshot.data![index],
                               token: token,
-                            )));
+                            )));*/
               },
               icon: const Icon(Icons.swap_horiz),
               label: const Text('Chuyển trạng thái'),
